@@ -57,5 +57,37 @@ module.exports = {
                 mensagem: err
             });
         }
+    },
+    async editar(req, res) {
+
+        try {
+            const { email, senha } = req.body;
+
+            const user = await User.findOne({ email }).select('+senha');
+
+            if (!user)
+                return res.send('Usuario não encontrado');
+
+            if (!await bcrypt.compare(senha, user.senha))
+                return res.send({
+                    status: false,
+                    mensagem: "Senha inválida"
+                });
+
+            user.senha = undefined;
+
+            return res.json({
+                user,
+                status: true,
+                mensagem: "Sucesso"
+            });
+        } catch (err) {
+            return res.send({
+                status: false,
+                mensagem: err
+            });
+        }
     }
+    
+
 }
