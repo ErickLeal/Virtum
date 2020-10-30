@@ -5,7 +5,7 @@ const controllers = require('./controllers');
 
 routes.post('/cadastrar', controllers.userController.cadastrar);
 routes.post('/login', controllers.userController.login);
-routes.post('/editar', controllers.userController.editar);
+routes.post('/alterarnome', controllers.userController.alterarnome);
 routes.post('/buscaruserid', controllers.userController.buscaruserid);
 routes.post('/addamigo', controllers.userController.adicionaramigo);
 

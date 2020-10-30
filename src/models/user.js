@@ -30,7 +30,16 @@ const userSchema = new mongoose.Schema({
         type: String,
         required: true
     },
-    amigos: [amigosSchema],   
+    amigos: [{
+        idamigo:{
+            type: String,
+            required: true
+        },
+        nome:{
+            type: String,
+            required: true
+        }
+    }],   
     
 });
 
