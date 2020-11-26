@@ -24,10 +24,11 @@ module.exports = {
                 mensagem: "Reino criado com sucesso"
             });
         } catch (err) {
-            return res.send({
+            return res.json({
                 status: false,
-                mensagem: err
+                mensagem: err 
             });
+           
         }
     },
 

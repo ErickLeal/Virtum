@@ -58,7 +58,33 @@ const reinoSchema = new mongoose.Schema({
     descricao: {
         type: String,
         required: true
-    }
+    },
+    fichas: [{
+        id:{
+            type: String,
+            required: true
+        },
+        nome:{
+            type: String,
+            required: true
+        },
+        id_mestre:{
+            type: String,
+            required: true
+        },
+        nome_mestre:{
+            type: String,
+            required: true
+        },
+        categoria:{
+            type: String,
+            required: true
+        },
+        descricao:{
+            type: String,
+            required: true
+        }
+    }],   
     
 });
 
