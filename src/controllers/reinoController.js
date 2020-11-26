@@ -83,4 +83,55 @@ module.exports = {
         }
     },
 
+    async addficha(req, res) {
+
+        try {
+            const { id, id_jogador, classe, nome, raca, nivel, habilidade, equipamento, vida_total, vida_atual, deslocamento} = req.body;
+
+            const reino = await Reino.findOne({ id: id });
+            if (!reino)
+                return res.status(400).json({ status: false, mensagem: 'Reino não encontrado' })
+
+
+            await Reino.updateOne(
+                { id: id },
+                { $push: { fichas: { id_jogador, classe, nome, raca, nivel, habilidade, equipamento, vida_total, vida_atual, deslocamento } } },
+            );
+
+            return res.json({
+                status: true,
+                mensagem: "Sucesso"
+            });
+        } catch (err) {
+            return res.send({
+                status: false,
+                mensagem: err.message
+            });
+        }
+    },
+
+    async buscarfichas(req, res) {
+
+        try {
+            const { id } = req.body;
+
+            const reino = await Reino.findOne({ id: id });
+
+            if (!reino)
+                return res.json({ status: false, mensagem: 'Reino não encontrado' });
+
+            
+            return res.json({
+                personsagens: reino.fichas,
+                status: true,
+                mensagem: "Sucesso"
+            });
+        } catch (err) {
+            return res.send({
+                status: false,
+                mensagem: err.message
+            });
+        }
+    },
+
 }
