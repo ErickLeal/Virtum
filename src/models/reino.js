@@ -60,7 +60,7 @@ const reinoSchema = new mongoose.Schema({
         required: true
     },
     fichas: [{
-        id_jogador:{
+        classe:{
             type: String,
             required: true
         },
@@ -68,19 +68,35 @@ const reinoSchema = new mongoose.Schema({
             type: String,
             required: true
         },
-        id_mestre:{
+        raca:{
             type: String,
             required: true
         },
-        nome_mestre:{
+        nivel:{
             type: String,
             required: true
         },
-        categoria:{
+        habilidade:{
             type: String,
             required: true
         },
-        descricao:{
+        equipamento:{
+            type: String,
+            required: true
+        },
+        id_jogador:{
+            type: String,
+            required: true
+        },
+        vida_total:{
+            type: String,
+            required: true
+        },
+        vida_atual:{
+            type: String,
+            required: true
+        },
+        deslocamento:{
             type: String,
             required: true
         }
