@@ -60,7 +60,7 @@ const reinoSchema = new mongoose.Schema({
         required: true
     },
     fichas: [{
-        id:{
+        id_jogador:{
             type: String,
             required: true
         },
