@@ -12,5 +12,7 @@ routes.post('/addamigo', controllers.userController.adicionaramigo);
 
 //reinos
 routes.post('/reinos', controllers.reinoController.criar);
+routes.put('/reinos', controllers.reinoController.editar);
+routes.get('/reinos', controllers.reinoController.buscar);
 
 module.exports = routes;

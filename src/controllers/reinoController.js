@@ -26,39 +26,60 @@ module.exports = {
         } catch (err) {
             return res.json({
                 status: false,
-                mensagem: err 
+                mensagem: err.message
             });
            
         }
     },
 
     async buscar(req, res) {
+
         try {
-            const { nome, id_mestre, nome_mestre,categoria,descricao } = req.body;
+            const { nome } = req.body;
+            var reinos = []
 
-            const inc = await Inc.findOne({ buscador: "increment" })
+            if(nome){
+                reinos = await Reino.find({ "nome": { $regex: nome, $options: 'i' } });
+            }else{
+                reinos = await Reino.find({});
+            }
 
-            const reino = await Reino.create({
-                id: "#" + inc.reino,
-                nome,
-                id_mestre,
-                nome_mestre,
-                categoria,
-                descricao
+            return res.json({
+                reinos,
+                status: true,
+                mensagem: "Sucesso"
             });
-            inc.reino++;
-            inc.save();
+        } catch (err) {
+            return res.send({
+                status: false,
+                mensagem: err.message
+            });
+        }
+    },
+
+    async editar(req, res) {
+
+        try {
+            const { id, descricao } = req.body;
+
+            const reino = await Reino.findOne({ id });
+
+            if (!reino)
+                return res.status(400).json({ status: false, mensagem: 'Reino não encontrado' })
+
+            reino.descricao= descricao;
+
+            reino.save();
 
             return res.json({
                 status: true,
-                mensagem: "Reino criado com sucesso"
+                mensagem: "Sucesso"
             });
         } catch (err) {
             return res.json({
                 status: false,
-                mensagem: err 
+                mensagem: err.message
             });
-           
         }
     },
 
